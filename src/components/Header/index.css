@@ -1,0 +1,32 @@
+.main-header {
+  background-color: #ffffff;
+}
+
+.topbar {
+  border-bottom: 1px solid #e9ebeb;
+}
+
+.topbar img {
+  width: 164px;
+}
+
+.restaurants-infos {
+  display: flex;
+  padding: 30px 0;
+}
+
+.restaurants-infos-left h1 {
+  margin-bottom: 46px;
+}
+
+.restaurants-infos-left p {
+  color: #868a8a;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.restaurants-infos-right img {
+  max-width: 350px;
+  border-radius: 5px;
+  margin-left: 30px;
+}

@@ -1,25 +1,106 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+
+import "./App.css";
+
+import Header from "./components/Header";
+import Section from "./components/Section";
+import Container from "./components/Container";
+import Cart from "./components/Cart";
 
 function App() {
+  const [data, setData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedProducts, setSelectedProducts] = useState([]);
+
+  const fetchData = async () => {
+    const response = await axios.get(
+      "https://deliveroo-exercice.herokuapp.com/"
+    );
+
+    setData(response.data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const categories = isLoading
+    ? []
+    : data.categories.filter(category => category.meals.length > 0);
+
+  const findProductIndex = title => {
+    const index = selectedProducts.findIndex(p => p.title === title);
+
+    return index >= 0 ? index : null;
+  };
+
+  const handleProductClick = ({ title, price }) => {
+    const newSelectedProducts = [...selectedProducts];
+    const index = findProductIndex(title);
+
+    if (index !== null) {
+      newSelectedProducts[index].quantity += 1;
+    } else {
+      newSelectedProducts.push({ quantity: 1, title, price });
+    }
+
+    setSelectedProducts(newSelectedProducts);
+  };
+
+  const handleAdd = product => {
+    const index = findProductIndex(product.title);
+    const newSelectedProducts = [...selectedProducts];
+    newSelectedProducts[index].quantity += 1;
+
+    setSelectedProducts(newSelectedProducts);
+  };
+
+  const handleRemove = product => {
+    const index = findProductIndex(product.title);
+    let newSelectedProducts = [...selectedProducts];
+
+    if (newSelectedProducts[index].quantity === 1) {
+      newSelectedProducts.splice(index, 1);
+    } else {
+      newSelectedProducts[index].quantity -= 1;
+    }
+
+    setSelectedProducts(newSelectedProducts);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {isLoading ? (
+        <p>En chargement...</p>
+      ) : (
+        <div>
+          <Header title={data.restaurant.name} data={data} />
+
+          <Container>
+            <div className="d-flex sb">
+              <div className="content">
+                {categories.map((category, index) => (
+                  <Section
+                    key={index}
+                    mainTitle={category.name}
+                    data={category.meals}
+                    onProductClick={handleProductClick}
+                  />
+                ))}
+              </div>
+
+              <Cart
+                selectedProducts={selectedProducts}
+                onAdd={handleAdd}
+                onRemove={handleRemove}
+              />
+            </div>
+          </Container>
+        </div>
+      )}
+    </>
   );
 }
 
