@@ -6,4 +6,6 @@ To clone this project : https://github.com/gloluz/food-order-frontend.git
 
 ### Read
 
+To read this project :
+
 `yarn start`
