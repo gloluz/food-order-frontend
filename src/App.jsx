@@ -8,7 +8,7 @@ import Section from "./components/Section";
 import Container from "./components/Container";
 import Cart from "./components/Cart";
 
-function App() {
+const App = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [selectedProducts, setSelectedProducts] = useState([]);
@@ -102,6 +102,6 @@ function App() {
       )}
     </>
   );
-}
+};
 
 export default App;
