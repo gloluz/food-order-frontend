@@ -1,4 +1,4 @@
-### Deliveroo clone frontend
+# Deliveroo clone frontend
 
 ## Description
 
