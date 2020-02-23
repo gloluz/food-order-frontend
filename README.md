@@ -16,7 +16,7 @@ To read this project :
 
 `yarn start`
 
-Or with this link: []
+Or with this link:
 
 ## Contributing
 
