@@ -8,6 +8,7 @@ import Section from "./components/Section";
 import Container from "./components/Container";
 import Cart from "./components/Cart";
 import Footer from "./components/Footer";
+import Loader from "./loader.svg";
 
 const App = () => {
   const [data, setData] = useState({});
@@ -72,7 +73,11 @@ const App = () => {
   return (
     <>
       {isLoading ? (
-        <p>En chargement...</p>
+        <Container>
+          <div className="loader">
+            <img src={Loader} alt="loader" />
+          </div>
+        </Container>
       ) : (
         <div>
           <Header title={data.restaurant.name} data={data} />
