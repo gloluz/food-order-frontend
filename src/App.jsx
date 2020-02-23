@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Section from "./components/Section";
 import Container from "./components/Container";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 const App = () => {
   const [data, setData] = useState({});
@@ -14,9 +15,7 @@ const App = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
 
   const fetchData = async () => {
-    const response = await axios.get(
-      "https://deliveroo-exercice.herokuapp.com/"
-    );
+    const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/`);
 
     setData(response.data);
     setIsLoading(false);
@@ -98,6 +97,8 @@ const App = () => {
               />
             </div>
           </Container>
+
+          <Footer />
         </div>
       )}
     </>
