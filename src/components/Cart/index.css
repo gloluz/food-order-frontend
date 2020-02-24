@@ -31,7 +31,12 @@
 .full-cart {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+}
+
+.price-full-cart {
+  margin: 0 0 0 auto;
+  min-width: 60px;
 }
 
 .cart-total {

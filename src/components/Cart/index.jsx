@@ -40,7 +40,7 @@ const Cart = ({ selectedProducts, onAdd, onRemove }) => {
                   onMore={() => onAdd(product)}
                 />
                 <p>{product.title} </p>
-                <p>{formatPrice(product.price)}</p>
+                <p className="price-full-cart">{formatPrice(product.price)}</p>
               </div>
             );
           })}
@@ -50,10 +50,10 @@ const Cart = ({ selectedProducts, onAdd, onRemove }) => {
               <div className={"cart-total"}>
                 <div className="cart-resum-price">
                   <p className="cart-subtotal">
-                    Sous-total {formatPrice(subtotals)}
+                    Sous-total : {formatPrice(subtotals)}
                   </p>
                   <p>
-                    Frais de Livraison{" "}
+                    Frais de Livraison :{" "}
                     <span className="price-delivery">
                       {formatPrice(deliveryPrice)}
                     </span>
